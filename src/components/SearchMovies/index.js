@@ -1,7 +1,5 @@
 import {Component} from 'react'
 
-import {format} from 'date-fns'
-
 import {Link, withRouter} from 'react-router-dom'
 
 import Loader from 'react-loader-spinner'
@@ -36,26 +34,10 @@ class SearchMovies extends Component {
     const response = await fetch(getSearchedMoviesURL)
     if (response.ok === true) {
       const data = await response.json()
-
-      const updatedData = data.results.map(result => ({
-        backdropPath: result.backdrop_path,
-        id: result.id,
-        adult: result.adult,
-        genreIds: result.genre_ids,
-        originalLanguage: result.original_language,
-        overview: result.overview,
-        popularity: result.popularity,
-        posterPath: result.poster_path,
-        releaseDate: result.release_date,
-        title: result.title,
-        video: result.video,
-        voteAverage: result.vote_average,
-        voteCount: result.vote_count,
-      }))
-      console.log(updatedData)
+      const {results} = data
 
       this.setState({
-        searchedMovieDetails: updatedData,
+        searchedMovieDetails: results,
         status: apiStatusConstants.success,
       })
     }
@@ -88,16 +70,14 @@ class SearchMovies extends Component {
         {searchedMovieDetails.map(each => (
           <li className="list-movies">
             <img
-              src={`https://image.tmdb.org/t/p/original${each.posterPath}`}
+              src={`https://image.tmdb.org/t/p/original${each.poster_path}`}
               className="poster_image"
-              alt={each.title}
+              alt={each.poster_path}
             />
-            <p className="rating">{Math.ceil(each.voteAverage * 10) / 10}</p>
+            <p className="rating">{Math.ceil(each.vote_average * 10) / 10}</p>
             <div className="content">
               <h1 className="movie-title">{each.title}</h1>
-              <p className="movie-date">
-                {format(new Date(`${each.releaseDate}`), 'MMM dd,yyyy')}
-              </p>
+              <p className="movie-date">{each.release_date}</p>
               <Link
                 to={`/movie/${each.id}`}
                 key={each.id}

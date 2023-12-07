@@ -1,7 +1,5 @@
 import {Component} from 'react'
 
-import {format, getYear} from 'date-fns'
-
 import Loader from 'react-loader-spinner'
 
 import Header from '../NavBar'
@@ -55,7 +53,7 @@ class MovieDetails extends Component {
         posterPath: data.poster_path,
         productionCompanies: data.production_companies,
         productionCountries: data.production_countries,
-        releaseDate: format(new Date(data.release_date), 'MM/dd/yyyy'),
+        releaseDate: data.release_date,
         revenue: data.revenue,
         runtime: data.runtime,
         spokenLanguages: data.spoken_languages,
@@ -87,7 +85,8 @@ class MovieDetails extends Component {
 
   renderSuccessView = () => {
     const {singleMovie, genresState} = this.state
-    const year = getYear(new Date(singleMovie.releaseDate))
+    const date = new Date(singleMovie.releaseDate)
+    const year = date.getFullYear()
 
     return (
       <>
