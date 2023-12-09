@@ -48,7 +48,7 @@ class MovieCastDetails extends Component {
           {movieCast.map(each => (
             <li className="castCrewEach">
               <img
-                src={`https://image.tmdb.org/t/p/original${each.profilePath}`}
+                src={`https://image.tmdb.org/t/p/w500${each.profilePath}`}
                 alt={each.id}
                 className="profile"
               />

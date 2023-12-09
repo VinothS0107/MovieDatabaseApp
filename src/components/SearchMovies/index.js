@@ -19,7 +19,6 @@ class SearchMovies extends Component {
   state = {
     status: apiStatusConstants.initial,
     search: '',
-    searchedValue: '',
     searchedMovieDetails: [],
   }
 
@@ -29,8 +28,8 @@ class SearchMovies extends Component {
 
   popularMovie = async apikey => {
     this.setState({status: apiStatusConstants.inProgress})
-    const {searchedValue} = this.state
-    const getSearchedMoviesURL = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=en-US&query=${searchedValue}&page=1`
+    const {search} = this.state
+    const getSearchedMoviesURL = `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&language=en-US&query=${search}&page=1`
     const response = await fetch(getSearchedMoviesURL)
     if (response.ok === true) {
       const data = await response.json()
@@ -39,6 +38,7 @@ class SearchMovies extends Component {
       this.setState({
         searchedMovieDetails: results,
         status: apiStatusConstants.success,
+        search: '',
       })
     }
   }
@@ -50,8 +50,7 @@ class SearchMovies extends Component {
 
   onSearchItem = event => {
     event.preventDefault()
-    const {search} = this.state
-    this.setState({searchedValue: search, search: ''}, this.componentDidMount)
+    this.componentDidMount()
   }
 
   renderLoader = () => (
@@ -70,9 +69,9 @@ class SearchMovies extends Component {
         {searchedMovieDetails.map(each => (
           <li className="list-movies">
             <img
-              src={`https://image.tmdb.org/t/p/original${each.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500${each.poster_path}`}
               className="poster_image"
-              alt={each.poster_path}
+              alt={each.title}
             />
             <p className="rating">{Math.ceil(each.vote_average * 10) / 10}</p>
             <div className="content">
@@ -118,6 +117,23 @@ class SearchMovies extends Component {
               movieDB
             </Link>
           </h1>
+          <div className="pages-list">
+            <h1 className="pages-cont">
+              <Link to="/" className="pages">
+                Popular
+              </Link>
+            </h1>
+            <h1 className="pages-cont">
+              <Link to="/top-rated" className="pages">
+                Top Rated
+              </Link>
+            </h1>
+            <li className="pages-cont">
+              <Link to="/upcoming" className="pages">
+                Upcoming
+              </Link>
+            </li>
+          </div>
           <div className="search-container">
             <input
               type="search"

@@ -57,7 +57,7 @@ export default class UpcomingMovie extends Component {
         {upcomingMovies.map(each => (
           <li key={each.id} className="list-movies">
             <img
-              src={`https://image.tmdb.org/t/p/original/${each.poster_path}`}
+              src={`https://image.tmdb.org/t/p/w500${each.poster_path}`}
               className="poster_image"
               alt={each.poster_path}
             />

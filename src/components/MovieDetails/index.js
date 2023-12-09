@@ -92,7 +92,7 @@ class MovieDetails extends Component {
       <>
         <div
           style={{
-            backgroundImage: `url(https://image.tmdb.org/t/p/original/${singleMovie.backdropPath})`,
+            backgroundImage: `url(https://image.tmdb.org/t/p/w500${singleMovie.backdropPath})`,
             backgroundSize: 'cover',
             width: '100%',
             minHeight: '90vh',

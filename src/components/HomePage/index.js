@@ -28,13 +28,12 @@ export default class HomePage extends Component {
 
   popularMovie = async apikey => {
     this.setState({status: apiStatusConstants.inProgress})
-    const getPopularMoviesURL = `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}&language=en-US&page=1`
 
+    const getPopularMoviesURL = `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}&language=en-US&page=1`
     const response = await fetch(getPopularMoviesURL)
     if (response.ok === true) {
       const data = await response.json()
       const {results} = data
-
       this.setState({
         popularMovies: results,
         status: apiStatusConstants.success,
@@ -54,31 +53,33 @@ export default class HomePage extends Component {
     const {popularMovies} = this.state
 
     return (
-      <ul className="popular-movies">
-        {popularMovies.map(each => (
-          <li className="list-movies">
-            <img
-              src={`https://image.tmdb.org/t/p/original/${each.poster_path}`}
-              className="poster_image"
-              alt={each.poster_path}
-            />
-            <p className="rating">{Math.ceil(each.vote_average * 10) / 10}</p>
-            <div className="content">
-              <h1 className="movie-title">{each.title}</h1>
-              <p className="movie-date">{each.release_date}</p>
-              <Link
-                to={`/movie/${each.id}`}
-                key={each.id}
-                className="each-movie-link "
-              >
-                <button type="button" className="viewDetails">
-                  View Details
-                </button>
-              </Link>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <>
+        <ul className="popular-movies">
+          {popularMovies.map(each => (
+            <li key={each.id} className="list-movies">
+              <img
+                src={`https://image.tmdb.org/t/p/w500${each.poster_path}`}
+                className="poster_image"
+                alt={each.poster_path}
+              />
+              <p className="rating">{Math.ceil(each.vote_average * 10) / 10}</p>
+              <div className="content">
+                <h1 className="movie-title">{each.title}</h1>
+                <p className="movie-date">{each.release_date}</p>
+                <Link
+                  to={`/movie/${each.id}`}
+                  key={each.id}
+                  className="each-movie-link "
+                >
+                  <button type="button" className="viewDetails">
+                    View Details
+                  </button>
+                </Link>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </>
     )
   }
 

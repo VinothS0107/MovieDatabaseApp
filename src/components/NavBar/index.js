@@ -3,11 +3,19 @@ import {Link, withRouter} from 'react-router-dom'
 import './index.css'
 
 const Header = props => {
-  const {match} = props
+  const {match, onChangeInput, valueEnter, onClickSearch} = props
   const {path} = match
   const isSelected = path === '/' ? 'selected-id' : 'pages'
   const isTopRated = path === '/top-rated' ? 'selected-id' : 'pages'
   const isUpcoming = path === '/upcoming' ? 'selected-id' : 'pages'
+
+  const onChangeInputVal = event => {
+    onChangeInput(event)
+  }
+
+  const onClickSearchVal = event => {
+    onClickSearch(event)
+  }
 
   return (
     <nav className="nav-header">
@@ -34,7 +42,18 @@ const Header = props => {
         </li>
       </div>
       <Link to="/search">
-        <button type="button" className="buttonSearch">
+        <input
+          type="search"
+          placeholder="Enter Movie Name"
+          value={valueEnter}
+          onChange={onChangeInputVal}
+          className="search-bar-input"
+        />
+        <button
+          type="button"
+          className="buttonSearch"
+          onClick={onClickSearchVal}
+        >
           Search
         </button>
       </Link>
