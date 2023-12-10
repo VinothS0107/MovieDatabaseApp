@@ -30,7 +30,7 @@ export default class UpcomingMovie extends Component {
   upcomingMovieData = async key => {
     this.setState({status: apiStatusConstants.inProgress})
     const {page} = this.state
-    const upcomingMoviesURL = `https://api.themoviedb.org/3/movie/top_rated?api_key=${key}&language=en-US&page=${page}`
+    const upcomingMoviesURL = `https://api.themoviedb.org/3/movie/upcoming?api_key=${key}&language=en-US&page=${page}`
     const response = await fetch(upcomingMoviesURL)
     if (response.ok === true) {
       const data = await response.json()

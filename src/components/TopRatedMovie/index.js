@@ -42,11 +42,11 @@ class TopRatedMovie extends Component {
   }
 
   pagination = operator => {
-    const {pageNumber} = this.state
-    if (operator === 'Decrease' && pageNumber > 1) {
+    const {page} = this.state
+    if (operator === 'Decrease' && page > 1) {
       this.setState(
         prev => ({
-          pageNumber: prev.pageNumber - 1,
+          page: prev.page - 1,
         }),
         this.componentDidMount,
       )
@@ -54,7 +54,7 @@ class TopRatedMovie extends Component {
     if (operator === 'Increase') {
       this.setState(
         prev => ({
-          pageNumber: prev.pageNumber + 1,
+          page: prev.page + 1,
         }),
         this.componentDidMount,
       )
