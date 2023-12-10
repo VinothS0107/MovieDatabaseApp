@@ -43,7 +43,7 @@ const Header = props => {
       </div>
       <Link to="/search">
         <input
-          type="search"
+          type="text"
           placeholder="Enter Movie Name"
           value={valueEnter}
           onChange={onChangeInputVal}
