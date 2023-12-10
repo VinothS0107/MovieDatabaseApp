@@ -41,7 +41,7 @@ const Header = props => {
           </Link>
         </li>
       </div>
-      <Link to="/search">
+      <Link to="/search"  className="search-container">
         <input
           type="text"
           placeholder="Enter Movie Name"
