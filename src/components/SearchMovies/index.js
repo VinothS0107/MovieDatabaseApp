@@ -136,7 +136,7 @@ class SearchMovies extends Component {
           </div>
           <div className="search-container">
             <input
-              type="search"
+              type="text"
               placeholder="Search"
               className="search-bar-input"
               value={search}
