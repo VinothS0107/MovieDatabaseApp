@@ -137,7 +137,7 @@ class SearchMovies extends Component {
           <div className="search-container">
             <input
               type="text"
-              placeholder="Search"
+              placeholder="Enter Movie Name"
               className="search-bar-input"
               value={search}
               onChange={this.onChangeEnter}

@@ -58,6 +58,7 @@
   align-items: center;
   height: 35px;
   background-color: #181818;
+  text-decoration: none;
 }
 .search-bar-input {
   width: 100%;
