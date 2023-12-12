@@ -71,7 +71,7 @@ export default class HomePage extends Component {
   }
 
   renderSuccess = () => {
-    const {popularMovies, page} = this.state
+    const {popularMovies} = this.state
 
     return (
       <>
@@ -100,6 +100,18 @@ export default class HomePage extends Component {
             </li>
           ))}
         </ul>
+      </>
+    )
+  }
+
+  render() {
+    const {status, page} = this.state
+    return (
+      <>
+        <Header />
+        {status === apiStatusConstants.inProgress
+          ? this.renderLoader()
+          : this.renderSuccess()}
         <div className="pagination">
           <button
             type="button"
@@ -117,18 +129,6 @@ export default class HomePage extends Component {
             Next
           </button>
         </div>
-      </>
-    )
-  }
-
-  render() {
-    const {status} = this.state
-    return (
-      <>
-        <Header />
-        {status === apiStatusConstants.inProgress
-          ? this.renderLoader()
-          : this.renderSuccess()}
       </>
     )
   }

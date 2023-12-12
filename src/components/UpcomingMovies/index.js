@@ -81,23 +81,6 @@ export default class UpcomingMovie extends Component {
             </li>
           ))}
         </ul>
-        <div className="pagination">
-          <button
-            type="button"
-            className={page === 1 ? 'disableButton' : 'buttonPagination'}
-            onClick={() => this.pagination('Decrease')}
-          >
-            Prev
-          </button>
-          <p className="pageNumber">{page}</p>
-          <button
-            type="button"
-            className="buttonPagination"
-            onClick={() => this.pagination('Increase')}
-          >
-            Next
-          </button>
-        </div>
       </>
     )
   }
@@ -123,7 +106,7 @@ export default class UpcomingMovie extends Component {
   }
 
   render() {
-    const {status} = this.state
+    const {status, page} = this.state
 
     return (
       <>
@@ -131,6 +114,23 @@ export default class UpcomingMovie extends Component {
         {status === apiStatusConstants.inProgress
           ? this.renderLoader()
           : this.renderSuccess()}
+        <div className="pagination">
+          <button
+            type="button"
+            className={page === 1 ? 'disableButton' : 'buttonPagination'}
+            onClick={() => this.pagination('Decrease')}
+          >
+            Prev
+          </button>
+          <p className="pageNumber">{page}</p>
+          <button
+            type="button"
+            className="buttonPagination"
+            onClick={() => this.pagination('Increase')}
+          >
+            Next
+          </button>
+        </div>
       </>
     )
   }

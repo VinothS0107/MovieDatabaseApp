@@ -99,6 +99,19 @@ class TopRatedMovie extends Component {
             </li>
           ))}
         </ul>
+      </>
+    )
+  }
+
+  render() {
+    const {status, page} = this.state
+
+    return (
+      <>
+        <Header />
+        {status === apiStatusConstants.inProgress
+          ? this.renderLoader()
+          : this.renderSuccess()}
         <div className="pagination">
           <button
             type="button"
@@ -116,19 +129,6 @@ class TopRatedMovie extends Component {
             Next
           </button>
         </div>
-      </>
-    )
-  }
-
-  render() {
-    const {status} = this.state
-
-    return (
-      <>
-        <Header />
-        {status === apiStatusConstants.inProgress
-          ? this.renderLoader()
-          : this.renderSuccess()}
       </>
     )
   }
